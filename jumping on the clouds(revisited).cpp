@@ -1,9 +1,10 @@
-//hackerrank
-//Emma is playing a new mobile game that starts with consecutively numbered clouds. 
-//Some of the clouds are thunderheads and others are cumulus. 
-//She can jump on any cumulus cloud having a number that is equal to the number of the current cloud plus 1 or 2. 
-//She must avoid the thunderheads. Determine the minimum number of jumps it will take Emma to jump from her starting postion to the last cloud. 
-//It is always possible to win the game.
+// HACKERRANK
+// Ques: Aerith is playing a cloud hopping game. In this game, there are sequentially numbered clouds that can be thunderheads or cumulus clouds.
+// Her character must jump from cloud to cloud until it reaches the start again.
+// To play, Aerith is given an array of clouds, c and an energy level e=100. 
+//She starts from c[0] and uses 1 unit of energy to make a jump of size k to cloud c[(i+k)%n]. 
+//If Aerith lands on a thundercloud,c[i]=1 , her energy (e) decreases by 2 additional units. 
+//The game ends when Aerith lands back on cloud 0.
 
 #include <bits/stdc++.h>
 
@@ -12,34 +13,45 @@ using namespace std;
 vector<string> split_string(string);
 
 // Complete the jumpingOnClouds function below.
-int jumpingOnClouds(vector<int> c) {
+int jumpingOnClouds(vector<int> c, int k) {
 
-    int jumps=0;
+    int i=0;
+    int e=100;
+    int n=c.size();
 
-    for(int i=0;i<c.size()-1;)
+    i=(i+k)%n;
+    e--;
+    if(c[0]==1)
     {
-        if(c[i+2]!=1)
-        {
-            i=i+2;
-            jumps++;
-        }
-        else if(c[i+2]==1)
-        {
-            i=i+1;
-            jumps++;
-        }
+        e=e-2;
     }
-    return jumps;
 
+    while(i!=0)
+    {
+        e--;
+        if(c[i]==1)
+        {
+            e=e-2;
+        }
+
+        i=(i+k)%n;
+    }
+
+    return e;
 }
 
 int main()
 {
     ofstream fout(getenv("OUTPUT_PATH"));
 
-    int n;
-    cin >> n;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    string nk_temp;
+    getline(cin, nk_temp);
+
+    vector<string> nk = split_string(nk_temp);
+
+    int n = stoi(nk[0]);
+
+    int k = stoi(nk[1]);
 
     string c_temp_temp;
     getline(cin, c_temp_temp);
@@ -54,7 +66,7 @@ int main()
         c[i] = c_item;
     }
 
-    int result = jumpingOnClouds(c);
+    int result = jumpingOnClouds(c, k);
 
     fout << result << "\n";
 
