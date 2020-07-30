@@ -28,7 +28,7 @@ void printDFS(int **adj, int n, int sv, int *visited)
 int main()
 {
 	int e,n;
-	cin>>e>>n;
+	cin>>n>>e;
 	
 	int **adj=new int *[n];
 	
