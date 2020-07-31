@@ -2,12 +2,12 @@
 #include<queue>
 using namespace std;
 
-void printBFS(int **adj, int n, int sv)
+void printBFS(int **adj, int v, int sv)
 {
 	queue<int>pendingVertices;
 	bool *visited=new bool[v];
 	
-	for(int i=0;i<n;i++)
+	for(int i=0;i<v;i++)
 	{
 		visited[i]=false;	
 	}
@@ -18,6 +18,7 @@ void printBFS(int **adj, int n, int sv)
 	{
 		int currentVertex=pendingVertices.front();
 		pendingVertices.pop();
+		cout<<currentVertex<<endl;
 		
 		for(int i=0;i<v;i++)
 		{
